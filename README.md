@@ -1,5 +1,13 @@
 # @intenttext/mcp-server
 
+## What is IntentText?
+
+IntentText (`.it`) is a plain-text document format where every line has a declared semantic type — making documents simultaneously human-writable and natively JSON. A `task:` is a task. A `step:` is an executable workflow step. Every block parses to typed, deterministic JSON with no interpretation required.
+
+This MCP server gives any AI agent the ability to work with IntentText documents as native tool calls.
+
+---
+
 MCP server for [IntentText](https://github.com/intenttext/IntentText) — parse, validate, query, render, and generate `.it` documents from any AI agent.
 
 With this server running, Claude, GPT, or any MCP-compatible agent can work with IntentText documents as native tool calls — without needing to understand the format itself.
