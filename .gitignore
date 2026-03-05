@@ -17,6 +17,11 @@ intenttext.browser.js
 .env.test.local
 .env.production.local
 
+# MCP registry local auth artifacts
+.mcpregistry_github_token
+.mcpregistry_registry_token
+mcp-publisher
+
 # IDE files
 .vscode/
 .idea/

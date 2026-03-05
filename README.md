@@ -1,5 +1,7 @@
 # @intenttext/mcp-server
 
+<!-- mcp-name: io.github.intenttext/intenttext-mcp -->
+
 ## What is IntentText?
 
 IntentText (`.it`) is a plain-text document format where every line has a declared semantic type — making documents simultaneously human-writable and natively JSON. A `task:` is a task. A `step:` is an executable workflow step. Every block parses to typed, deterministic JSON with no interpretation required.
@@ -44,6 +46,28 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
   "env": {}
 }
 ```
+
+## HTTP Wrapper (for hosted MCP URLs)
+
+This package also includes an HTTP wrapper so you can deploy it from this GitHub repo to platforms like Railway/Render/Fly and provide a URL (for directories that ask for `https://.../mcp`).
+
+```bash
+npm install
+npm run build
+npm run start:http
+```
+
+Endpoints:
+
+- `POST /mcp` - MCP Streamable HTTP endpoint
+- `GET /health` - health check endpoint
+
+Environment variables:
+
+- `PORT` (default `3000`)
+- `HOST` (default `0.0.0.0`)
+
+Note: GitHub itself cannot host a long-running Node server process. Keep the wrapper code in GitHub, then deploy it to a runtime provider and use that public URL in Smithery forms.
 
 ## Available Tools
 

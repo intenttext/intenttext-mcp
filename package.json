@@ -1,12 +1,14 @@
 {
   "name": "@intenttext/mcp-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "mcpName": "io.github.intenttext/intenttext-mcp",
   "description": "MCP server for IntentText — parse, validate, query, and render .it documents from any AI agent",
   "main": "dist/index.js",
   "type": "module",
   "types": "dist/index.d.ts",
   "bin": {
-    "intenttext-mcp": "dist/index.js"
+    "intenttext-mcp": "dist/index.js",
+    "intenttext-mcp-http": "dist/http.js"
   },
   "files": [
     "dist",
@@ -15,7 +17,8 @@
   "scripts": {
     "build": "tsc",
     "test": "vitest run",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "start:http": "node dist/http.js"
   },
   "keywords": [
     "intenttext",
