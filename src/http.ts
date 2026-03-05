@@ -1,12 +1,28 @@
 #!/usr/bin/env node
-import { createMcpExpressApp } from "@modelcontextprotocol/sdk/server/express.js";
+import express from "express";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { createServer } from "./server.js";
 
-const app = createMcpExpressApp();
+const port = Number(process.env.PORT || 3000);
+const host = process.env.HOST || "0.0.0.0";
+const app = express();
+app.use(express.json({ limit: "1mb" }));
 
 app.get("/health", (_req: any, res: any) => {
   res.status(200).json({ ok: true, service: "intenttext-mcp-http" });
+});
+
+app.get("/.well-known/mcp/server-card.json", (_req: any, res: any) => {
+  res.status(200).json({
+    name: "IntentText",
+    description:
+      "Parse, validate, query, and render IntentText (.it) documents for AI agents",
+    repository: "https://github.com/intenttext/intenttext-mcp",
+    mcp: {
+      transport: "streamable_http",
+      endpoint: "/mcp",
+    },
+  });
 });
 
 app.post("/mcp", async (req: any, res: any) => {
@@ -62,9 +78,6 @@ app.delete("/mcp", (_req: any, res: any) => {
     id: null,
   });
 });
-
-const port = Number(process.env.PORT || 3000);
-const host = process.env.HOST || "0.0.0.0";
 
 app.listen(port, host, (error?: Error) => {
   if (error) {
