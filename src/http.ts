@@ -73,5 +73,7 @@ app.listen(port, host, (error?: Error) => {
     process.exit(1);
   }
   // eslint-disable-next-line no-console
-  console.log(`IntentText MCP HTTP wrapper listening on http://${host}:${port}/mcp`);
+  console.log(
+    `IntentText MCP HTTP wrapper listening on http://${host}:${port}/mcp`,
+  );
 });
