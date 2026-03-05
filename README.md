@@ -8,6 +8,8 @@ IntentText (`.it`) is a plain-text document format where every line has a declar
 
 This MCP server gives any AI agent the ability to work with IntentText documents as native tool calls.
 
+**Deployed instance:** [https://intenttext-mcp.onrender.com](https://intenttext-mcp.onrender.com) — use this URL directly in any MCP client that supports remote servers.
+
 ---
 
 MCP server for [IntentText](https://github.com/intenttext/IntentText) — parse, validate, query, render, and generate `.it` documents from any AI agent.
@@ -68,6 +70,8 @@ Environment variables:
 - `HOST` (default `0.0.0.0`)
 
 Note: GitHub itself cannot host a long-running Node server process. Keep the wrapper code in GitHub, then deploy it to a runtime provider and use that public URL in Smithery forms.
+
+The public deployment is available at **https://intenttext-mcp.onrender.com**.
 
 ## Available Tools
 
