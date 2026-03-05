@@ -1,0 +1,49 @@
+{
+  "name": "@intenttext/mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for IntentText — parse, validate, query, and render .it documents from any AI agent",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "intenttext-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "intenttext",
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "agent",
+    "parser"
+  ],
+  "author": "IntentText Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/intenttext/intenttext-mcp.git"
+  },
+  "homepage": "https://github.com/intenttext/intenttext-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/intenttext/intenttext-mcp/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@intenttext/core": ">=2.6.0",
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
+  }
+}
