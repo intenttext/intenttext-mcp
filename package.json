@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "MCP server for IntentText — parse, validate, query, and render .it documents from any AI agent",
   "main": "dist/index.js",
+  "type": "module",
   "types": "dist/index.d.ts",
   "bin": {
     "intenttext-mcp": "dist/index.js"
@@ -38,7 +39,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@intenttext/core": ">=2.6.0",
+    "@intenttext/core": "^2.6.1",
     "@modelcontextprotocol/sdk": "^1.0.0"
   },
   "devDependencies": {

@@ -15,7 +15,7 @@ export function registerParseTools(server: McpServer): void {
         .boolean()
         .default(true)
         .describe(
-          "If true, never throw — returns warnings instead of errors. Default: true"
+          "If true, never throw — returns warnings instead of errors. Default: true",
         ),
     },
     async ({ source, safe }) => {
@@ -30,6 +30,6 @@ export function registerParseTools(server: McpServer): void {
         const document = parseIntentText(source);
         return jsonResult(document);
       }
-    }
+    },
   );
 }

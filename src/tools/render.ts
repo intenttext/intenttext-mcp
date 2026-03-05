@@ -15,7 +15,7 @@ export function registerRenderTools(server: McpServer): void {
       const doc = parseIntentText(source);
       const html = renderHTML(doc);
       return textResult(html);
-    }
+    },
   );
 
   server.tool(
@@ -29,6 +29,6 @@ export function registerRenderTools(server: McpServer): void {
       const doc = parseIntentText(source);
       const html = renderPrint(doc);
       return textResult(html);
-    }
+    },
   );
 }

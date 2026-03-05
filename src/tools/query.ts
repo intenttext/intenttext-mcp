@@ -1,9 +1,6 @@
 import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import {
-  parseIntentText,
-  queryDocument,
-} from "@intenttext/core";
+import { parseIntentText, queryDocument } from "@intenttext/core";
 import type { SimpleQueryOptions } from "@intenttext/core";
 import { jsonResult } from "../types.js";
 
@@ -20,19 +17,19 @@ export function registerQueryTools(server: McpServer): void {
         .optional()
         .describe(
           "Block type to filter by (e.g. 'task', 'step', 'gate'). " +
-            "Comma-separated for multiple types: 'step,gate,decision'"
+            "Comma-separated for multiple types: 'step,gate,decision'",
         ),
       content: z
         .string()
         .optional()
         .describe(
-          "Substring to search for in block content (case-insensitive)"
+          "Substring to search for in block content (case-insensitive)",
         ),
       section: z
         .string()
         .optional()
         .describe(
-          "Only return blocks within this section (substring match on section title)"
+          "Only return blocks within this section (substring match on section title)",
         ),
       limit: z
         .number()
@@ -52,6 +49,6 @@ export function registerQueryTools(server: McpServer): void {
       if (limit) query.limit = limit;
       const results = queryDocument(doc, query);
       return jsonResult({ count: results.length, blocks: results });
-    }
+    },
   );
 }

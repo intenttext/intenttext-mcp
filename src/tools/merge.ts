@@ -17,19 +17,15 @@ export function registerMergeTools(server: McpServer): void {
     {
       template: z
         .string()
-        .describe(
-          "IntentText template source with {{variable}} placeholders"
-        ),
+        .describe("IntentText template source with {{variable}} placeholders"),
       data: z
-        .record(z.unknown())
-        .describe(
-          "JSON object with values to substitute into the template"
-        ),
+        .record(z.string(), z.unknown())
+        .describe("JSON object with values to substitute into the template"),
       render: z
         .enum(["none", "html", "print"])
         .default("none")
         .describe(
-          "Optionally render the merged result. Default: none (returns .it source)"
+          "Optionally render the merged result. Default: none (returns .it source)",
         ),
     },
     async ({ template, data, render }) => {
@@ -41,6 +37,6 @@ export function registerMergeTools(server: McpServer): void {
         return textResult(renderPrint(doc));
       }
       return textResult(documentToSource(doc));
-    }
+    },
   );
 }

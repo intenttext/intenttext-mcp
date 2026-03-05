@@ -22,6 +22,6 @@ export function registerValidateTools(server: McpServer): void {
         warning_count: result.issues.filter((i) => i.type === "warning").length,
         issues: result.issues,
       });
-    }
+    },
   );
 }

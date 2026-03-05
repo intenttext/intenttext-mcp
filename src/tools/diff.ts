@@ -18,6 +18,6 @@ export function registerDiffTools(server: McpServer): void {
       const docAfter = parseIntentText(after);
       const diff = diffDocuments(docBefore, docAfter);
       return jsonResult(diff);
-    }
+    },
   );
 }
