@@ -42,7 +42,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@intenttext/core": "^2.8.0",
+    "@intenttext/core": "^2.9.0",
     "@modelcontextprotocol/sdk": "^1.0.0",
     "express": "^4.19.2"
   },
