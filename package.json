@@ -1,6 +1,6 @@
 {
   "name": "@intenttext/mcp-server",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "mcpName": "io.github.intenttext/intenttext-mcp",
   "description": "MCP server for IntentText — parse, validate, query, and render .it documents from any AI agent",
   "main": "dist/index.js",
@@ -42,7 +42,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@intenttext/core": "^2.6.1",
+    "@intenttext/core": "^2.7.0",
     "@modelcontextprotocol/sdk": "^1.0.0",
     "express": "^4.19.2"
   },
