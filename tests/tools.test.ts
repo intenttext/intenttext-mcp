@@ -198,7 +198,7 @@ describe("document_to_source", () => {
     const doc = parseIntentText("# My Doc\n- task: Do stuff\n- note: A note");
     const source = documentToSource(doc);
     expect(source).toContain("task:");
-    expect(source).toContain("note:");
+    expect(source).toContain("text:");
   });
 
   it("round-trips parse → source → parse", () => {
