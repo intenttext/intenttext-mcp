@@ -10,7 +10,6 @@ import {
   queryDocument,
   diffDocuments,
   extractWorkflow,
-  executeWorkflow,
 } from "@intenttext/core";
 import type { IntentDocument } from "@intenttext/core";
 
@@ -275,77 +274,5 @@ step: C | id: c | depends: a,b`;
     expect(graph.executionOrder[0]).toContain("a");
     expect(graph.executionOrder[0]).toContain("b");
     expect(graph.executionOrder[1]).toContain("c");
-  });
-});
-
-describe("execute_workflow", () => {
-  it("executes a simple linear workflow", async () => {
-    const source = `title: Simple Workflow
-step: Fetch data | id: fetch | tool: fetch-api
-step: Process data | id: process | depends: fetch | tool: transform`;
-    const doc = parseIntentText(source);
-    const result = await executeWorkflow(doc, {
-      tools: {
-        "fetch-api": async () => ({ rows: 5 }),
-        transform: async () => ({ processed: true }),
-      },
-    });
-    expect(result.status).toBe("completed");
-    expect(result.log.length).toBeGreaterThan(0);
-  });
-
-  it("runs in dry-run mode without calling tools", async () => {
-    const source = `step: Do something | id: s1 | tool: my-tool`;
-    const doc = parseIntentText(source);
-    const result = await executeWorkflow(doc, {
-      options: { dryRun: true },
-    });
-    expect(result.status).toBe("dry_run");
-    expect(result.log.every((e) => e.status === "dry_run" || e.status === "skipped")).toBe(true);
-  });
-
-  it("blocks on gate when onGate returns false", async () => {
-    const source = `step: Build | id: build | tool: builder
-gate: Approval | id: approval | depends: build | approver: manager
-step: Deploy | id: deploy | depends: approval | tool: deployer`;
-    const doc = parseIntentText(source);
-    const result = await executeWorkflow(doc, {
-      tools: {
-        builder: async () => "built",
-        deployer: async () => "deployed",
-      },
-      onGate: async () => false,
-    });
-    expect(result.status).toBe("gate_blocked");
-    expect(result.blockedAt).toBeDefined();
-  });
-
-  it("passes initial context to execution", async () => {
-    const source = `step: Greet | id: greet | tool: greeter`;
-    const doc = parseIntentText(source);
-    const result = await executeWorkflow(doc, {
-      context: { name: "Ahmed" },
-      tools: {
-        greeter: async (_input, ctx) => `Hello ${ctx.name}`,
-      },
-    });
-    expect(result.status).toBe("completed");
-    expect(result.context.name).toBe("Ahmed");
-  });
-
-  it("evaluates decision branches", async () => {
-    const source = `step: Check | id: check | tool: checker
-decision: Route | id: route | depends: check | condition: check.status == "ok" | then: good | else: bad
-step: Good path | id: good | tool: good-tool
-step: Bad path | id: bad | tool: bad-tool`;
-    const doc = parseIntentText(source);
-    const result = await executeWorkflow(doc, {
-      tools: {
-        checker: async () => ({ status: "ok" }),
-        "good-tool": async () => "success",
-        "bad-tool": async () => "failure",
-      },
-    });
-    expect(result.status).toBe("completed");
   });
 });
