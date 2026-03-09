@@ -13,6 +13,21 @@ import {
 } from "@intenttext/core";
 import type { IntentDocument } from "@intenttext/core";
 
+function withTsEngine<T>(fn: () => T): T {
+  const prev = (globalThis as Record<string, unknown>)
+    .__INTENTTEXT_CORE_ENGINE;
+  (globalThis as Record<string, unknown>).__INTENTTEXT_CORE_ENGINE = "ts";
+  try {
+    return fn();
+  } finally {
+    if (prev === undefined) {
+      delete (globalThis as Record<string, unknown>).__INTENTTEXT_CORE_ENGINE;
+    } else {
+      (globalThis as Record<string, unknown>).__INTENTTEXT_CORE_ENGINE = prev;
+    }
+  }
+}
+
 // These tests validate the functions that back each MCP tool.
 // The MCP tools are thin async wrappers, so testing the core functions
 // directly gives us full coverage of tool behavior.
@@ -99,8 +114,10 @@ describe("validate_document", () => {
     const source = `title: Workflow
 step: Step A | tool: api | id: step-a
 decision: Check result | then: step-nonexistent | else: step-a`;
-    const doc = parseIntentText(source);
-    const result = validateDocumentSemantic(doc);
+    const result = withTsEngine(() => {
+      const doc = parseIntentText(source);
+      return validateDocumentSemantic(doc);
+    });
     const errors = result.issues.filter((i) => i.type === "error");
     expect(errors.length).toBeGreaterThan(0);
     expect(errors.some((e) => e.code === "STEP_REF_MISSING")).toBe(true);
@@ -109,8 +126,10 @@ decision: Check result | then: step-nonexistent | else: step-a`;
   it("returns valid for well-formed document", () => {
     const source = `title: Simple Doc
 task: Do something | owner: Ahmed`;
-    const doc = parseIntentText(source);
-    const result = validateDocumentSemantic(doc);
+    const result = withTsEngine(() => {
+      const doc = parseIntentText(source);
+      return validateDocumentSemantic(doc);
+    });
     const errors = result.issues.filter((i) => i.type === "error");
     expect(errors.length).toBe(0);
   });

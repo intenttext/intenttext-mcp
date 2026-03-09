@@ -12,7 +12,7 @@ import { registerTrustTools } from "./tools/trust.js";
 export function createServer(): McpServer {
   const server = new McpServer({
     name: "intenttext",
-    version: "1.1.0",
+    version: "1.4.2",
   });
 
   registerParseTools(server);
