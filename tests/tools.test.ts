@@ -14,8 +14,7 @@ import {
 import type { IntentDocument } from "@intenttext/core";
 
 function withTsEngine<T>(fn: () => T): T {
-  const prev = (globalThis as Record<string, unknown>)
-    .__INTENTTEXT_CORE_ENGINE;
+  const prev = (globalThis as Record<string, unknown>).__INTENTTEXT_CORE_ENGINE;
   (globalThis as Record<string, unknown>).__INTENTTEXT_CORE_ENGINE = "ts";
   try {
     return fn();
